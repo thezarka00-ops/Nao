@@ -2,6 +2,9 @@ package org.fight.IA.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -544,8 +547,7 @@ public class Function {
      }
 
      public static Map<Integer, Fighter> getLowHpEnnemyList(Fight fight, Fighter fighter) {
-         Map<Integer, Fighter> list = new TreeMap<Integer, Fighter>();
-         Map<Integer, Fighter> ennemy = new TreeMap<Integer, Fighter>();
+         List<Fighter> ennemy = new ArrayList<Fighter>();
          for (Fighter f : fight.getFighters(3)) {
              if (f == null) {
                  continue;
@@ -557,33 +559,18 @@ public class Function {
                  continue;
              }
              if (f.getTeam2() != fighter.getTeam2()) {
-                 ennemy.put(f.getPDV(), f);
+                 ennemy.add(f);
              }
          }
-         int i = 0, i2 = ennemy.size();
-         int curHP = 1000000000;
-         while (i < i2) {
-             try {
-                 curHP = 1000000000;
-                 for (Entry<Integer, Fighter> t : ennemy.entrySet()) {
-                     if (t.getValue() == null) {
-                         continue;
-                     }
-                     if (t.getValue().getPDV() < curHP) {
-                         curHP = t.getValue().getPDV();
-                     }
-                     //TODO: J'ai cherch�, j'ai rien trouver � faire :o
-                 }
-                 Fighter test = ennemy.get(curHP);
-                 if (test == null) {
-                     break;
-                 }
-                 list.put(test.getPDV(), test);
-                 ennemy.remove(curHP);
-                 i++;
-             } catch (NullPointerException e) {
-                 break;
-             }//Avec mon calcul on arriverait � cette ligne...
+         Collections.sort(ennemy, new Comparator<Fighter>() {
+             public int compare(Fighter a, Fighter b) {
+                 return Integer.compare(a.getPDV(), b.getPDV());
+             }
+         });
+         Map<Integer, Fighter> list = new LinkedHashMap<Integer, Fighter>();
+         int i = 0;
+         for (Fighter f : ennemy) {
+             list.put(i++, f);
          }
          return list;
      }

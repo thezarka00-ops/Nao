@@ -7,10 +7,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.check.IpCheck;
 import org.client.Accounts;
@@ -28,7 +29,7 @@ public class GameServer implements Runnable {
 
 	private ServerSocket _SS;
 	private Thread _t;
-	private ArrayList<GameThread> _clients = new ArrayList<GameThread>();
+	private CopyOnWriteArrayList<GameThread> _clients = new CopyOnWriteArrayList<GameThread>();
 	private ArrayList<Accounts> _waitings = new ArrayList<Accounts>();
 	private Timer _saveTimer;
 	// private Timer _loadActionTimer;
@@ -43,7 +44,7 @@ public class GameServer implements Runnable {
 	private Timer _reboot;
 	private int _rebootTime = Config.CONFIG_REBOOT_TIME; // hour
 	public static boolean isFirstLoad = false;
-	public static Map<String, Long> lastIpTiming = new HashMap<String, Long>();
+	public static Map<String, Long> lastIpTiming = new ConcurrentHashMap<String, Long>();
 	public static String ip;
 
 	public GameServer(String Ip) {
@@ -217,7 +218,7 @@ public class GameServer implements Runnable {
 		this.stop();
 	}
 
-	public ArrayList<GameThread> getClients() {
+	public java.util.List<GameThread> getClients() {
 		return _clients;
 	}
 
