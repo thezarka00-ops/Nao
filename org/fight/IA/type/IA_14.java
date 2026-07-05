@@ -20,7 +20,7 @@ public class IA_14 {
 			
 			if (PDVPER > 15) {
 				if (Function.moveToAttackIfPossible(fight, F)) {
-					int attack = Function.attackIfPossible(fight, T);
+					int attack = Function.attackIfPossible(fight, F);
 					if (attack != 0)// Attaque
 					{
 						if (attack == 5) { // EC
@@ -50,7 +50,7 @@ public class IA_14 {
 			} else {
 				if (!Function.HealIfPossible(fight, F, true))// auto-soin
 				{
-					int attack = Function.attackIfPossible(fight, T);
+					int attack = Function.attackIfPossible(fight, F);
 					if (attack != 0)// Attaque
 					{
 						if (attack == 5){

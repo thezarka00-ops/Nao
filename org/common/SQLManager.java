@@ -129,8 +129,8 @@ public class SQLManager {
 		DB = Connection();
 
 		Statement stat = DB.createStatement();
-		ResultSet RS = stat.executeQuery(query);
 		stat.setQueryTimeout(300);
+		ResultSet RS = stat.executeQuery(query);
 		return RS;
 	}
 
@@ -684,8 +684,10 @@ public class SQLManager {
 	public static int getNextPersonnageGuid() {
 		try {
 			ResultSet RS = executeQuery("SELECT guid FROM personnages ORDER BY guid DESC LIMIT 1;", Config.DB_NAME);
-			if (!RS.first())
+			if (!RS.first()) {
+				closeResultSet(RS);
 				return 1;
+			}
 			int guid = RS.getInt("guid");
 			guid++;
 			closeResultSet(RS);
@@ -868,6 +870,7 @@ public class SQLManager {
 			p.execute();
 
 			if (!perso.getItemsIDSplitByChar(",").equals("")) {
+				closePreparedStatement(p);
 				baseQuery = "DELETE FROM items WHERE guid IN (?);";
 				p = newTransact(baseQuery, Connection());
 				p.setString(1, perso.getItemsIDSplitByChar(","));
@@ -875,6 +878,7 @@ public class SQLManager {
 				p.execute();
 			}
 			if (!perso.getStoreItemsIDSplitByChar(",").equals("")) {
+				closePreparedStatement(p);
 				baseQuery = "DELETE FROM items WHERE guid IN (?);";
 				p = newTransact(baseQuery, Connection());
 				p.setString(1, perso.getStoreItemsIDSplitByChar(","));
@@ -882,6 +886,7 @@ public class SQLManager {
 				p.execute();
 			}
 			if (perso.getMount() != null) {
+				closePreparedStatement(p);
 				baseQuery = "DELETE FROM mounts_data WHERE id = ?";
 				p = newTransact(baseQuery, Connection());
 				p.setInt(1, perso.getMount().get_id());

@@ -26,12 +26,10 @@ public class ClientHandler implements IoHandler {
 		String packet = (String) arg1;
 		
 		String[] s = packet.split("\n");
-		int i = 0;
-		do {
+		for(int i = 0; i < s.length; i++) {
 			Logs.addToRealmLog("Login: Recv << " + s[i] + " to session " + arg0.getId());
 			Client.clients.get(arg0.getId()).parser(s[i]);
-			i++;
-		} while(i == s.length - 1);
+		}
 	}
 	
 	@Override
@@ -45,6 +43,7 @@ public class ClientHandler implements IoHandler {
 		Client client = Client.clients.get(arg0.getId());
 		Accounts account = client.getAccount();
 		account.setState(0);
+		Client.clients.remove(arg0.getId());
 	}
 	
 	@Override

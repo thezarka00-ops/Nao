@@ -18,8 +18,8 @@ public class AccountQueue {
 		ip = ip.substring(1).split("\\:")[0];
 		
 		// initialisation de la state du client pour lui switcher sa maman!
-		if (worldAccount.isOnline() && worldAccount.getGameThread() != null)
-			state = 2;
+		if (worldAccount.isOnline() && worldAccount.getGameThread() == null)
+			state = 1;
 		if (worldAccount.getGameThread() != null)
 			state = 2;
 		if (worldAccount.isBanned())

@@ -23,7 +23,7 @@ public class IA {
 
 		private Fight _fight;
 		private Fighter _fighter;
-		private static boolean stop = false;
+		private boolean stop = false;
 		private Thread _t;
 
 		public IAThread(Fighter fighter, Fight fight) {
@@ -125,11 +125,11 @@ public class IA {
 		}
 
 		// IA pourri de merde
-		private static void apply_type0(Fighter F, Fight fight) {
+		private void apply_type0(Fighter F, Fight fight) {
 			stop = true;
 		}
 
-		private static void apply_typePerco(Fight.Fighter F, Fight fight) {
+		private void apply_typePerco(Fight.Fighter F, Fight fight) {
 			try {
 				int noBoucle = 0;
 				do {

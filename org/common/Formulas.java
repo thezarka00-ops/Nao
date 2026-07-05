@@ -191,7 +191,7 @@ public class Formulas {
 				resfT += targetStats.getEffect(Constant.STATS_ADD_R_PVP_EAU);
 			}
 			// Ajout de la resist Magique
-			resfT = targetStats.getEffect(183);
+			resfT += targetStats.getEffect(183);
 			break;
 		case Constant.ELEMENT_FEU:// intell
 			statC = casterStats.getEffect(Constant.STATS_ADD_INTE);
@@ -1181,8 +1181,8 @@ public class Formulas {
 	public static int getLoosEnergy(int lvl, boolean isAgression, boolean isPerco)
 	{
 		int returned = 25*lvl;
-		if(isAgression) returned *= (7/4);
-		if(isPerco) returned *= (3/2);
+		if(isAgression) returned = returned * 7 / 4;
+		if(isPerco) returned = returned * 3 / 2;
 		return returned;
 	}
 	

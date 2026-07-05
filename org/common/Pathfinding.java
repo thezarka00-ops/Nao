@@ -97,8 +97,9 @@ public class Pathfinding {
 		return enemy;
 	}
 
-	public static boolean isNextTo(int cell1, int cell2) {
-		if (cell1 + 14 == cell2 || cell1 + 15 == cell2 || cell1 - 14 == cell2 || cell1 - 15 == cell2)
+	public static boolean isNextTo(Maps map, int cell1, int cell2) {
+		int w = map.get_w();
+		if (cell1 + w == cell2 || cell1 + (w - 1) == cell2 || cell1 - w == cell2 || cell1 - (w - 1) == cell2)
 			return true;
 		else
 			return false;

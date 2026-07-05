@@ -413,12 +413,7 @@ public class Mount {
 		if (!_items.contains(objToDelete)) {
 			return;
 		}
-		if(_items.get(objToDelete.getGuid()) == null)
-		{
-			Logs.addToGameLog("Le joueur "+perso.get_name()+" a tenter d'ajouter un objet au store qu'il n'avait pas.");
-			return;
-		}
-		if (_items.get(objToDelete.getGuid()).getQuantity() < qua)
+		if (objToDelete.getQuantity() < qua)
 		{
 			Logs.addToGameLog("Le joueur "+perso.get_name()+" a tenté d'ajouter une quantité d'objet en banque dont il ne possédait pas.");
 			return;

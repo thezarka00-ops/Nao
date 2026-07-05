@@ -1976,7 +1976,7 @@ public class Fight {
 			return null;
 		int limit = 0;
 		do {
-			int id = rand.nextInt(cells.size() - 1);
+			int id = rand.nextInt(cells.size());
 			cell = cells.get(id);
 			limit++;
 		} while ((cell == null || !cell.getFighters().isEmpty()) && limit < 80);
@@ -6372,7 +6372,7 @@ public class Fight {
 			for (Fighter f : _team1.values()) {
 				if (f.isPerco())
 					return true;
-				if (!f.isInvocation() || f.isDead() || f.getPersonnage() == null || f.getMob() != null
+				if (f.isInvocation() || f.isDead() || f.getPersonnage() == null || f.getMob() != null
 						|| f._double != null || f.hasLeft()) {
 					continue;
 				}

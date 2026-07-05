@@ -17,7 +17,7 @@ public class IA_10 {
 			if (T == null)
 				return;
 
-			int attack = Function.attackIfPossible(fight, T);
+			int attack = Function.attackIfPossible(fight, F);
 			if (attack != 0)// Attaque
 			{
 				if (attack == 5)

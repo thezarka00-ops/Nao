@@ -10,7 +10,7 @@ public class IA_02 {
 		boolean modeAttack = false;
 		Fighter T = Function.getNearestFriend(fight, F);
 		Fighter E = null;
-		if (Pathfinding.getDistanceBetween(fight.get_map(), F.get_fightCell().getID(),
+		if (T != null && Pathfinding.getDistanceBetween(fight.get_map(), F.get_fightCell().getID(),
 				T.get_fightCell().getID()) < 4)
 			modeAttack = true;
 		while (!stop && F.canPlay()) {

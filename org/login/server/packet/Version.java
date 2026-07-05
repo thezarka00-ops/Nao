@@ -11,11 +11,12 @@ import org.login.server.Client.Status;
 public class Version {
 	
 	public static void verify(Client client, String version) {
-		if(!version.equalsIgnoreCase(LoginServer.version)){ 
+		if(!version.equalsIgnoreCase(LoginServer.version)){
 			client.send("AlEv" + LoginServer.version);
 			client.kick();
+			return;
 		}
-		
+
 		client.setStatus(Status.WAIT_ACCOUNT);
 	}
 }

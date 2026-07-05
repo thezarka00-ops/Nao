@@ -4672,7 +4672,7 @@ public class GameThread implements Runnable {
 		action = Integer.parseInt(packets.split(";")[1]); } catch (Exception localException) {
 		}
 		}
-		if ((actionID == 500) && (this.GA_wait == null) && (this.wait == 1) && (!Pathfinding.isNextTo(this._perso.get_curCell().getID(), cellID)))
+		if ((actionID == 500) && (this.GA_wait == null) && (this.wait == 1) && (!Pathfinding.isNextTo(this._perso.get_curCarte(), this._perso.get_curCell().getID(), cellID)))
 		{
 		GA_wait = GA;
 		return;
@@ -5120,20 +5120,23 @@ public class GameThread implements Runnable {
 			Main.gameServer.delClient(this);
 			IpCheck.delGameConnection(_s.getInetAddress().getHostAddress());
 			IpCheck.delRealmConnection(_s.getInetAddress().getHostAddress());
-			synchronized(_compte)
+			if(_compte != null)
 			{
-	    		if(_compte != null)
+				synchronized(_compte)
+				{
 	    			_compte.deconnexion(_compte);
+				}
 			}
     		if(_s != null)
-    			if(!_s.isClosed()) 
+    			if(!_s.isClosed())
     				_s.close();
-    		
-    		if(_in != null) 
+
+    		if(_in != null)
     			_in.close();
     		if(_out != null)
     			_out.close();
-    		Logs.addToGameLog("Le compteID " + _compte.get_GUID() +" a ete kick");
+    		if(_compte != null)
+    			Logs.addToGameLog("Le compteID " + _compte.get_GUID() +" a ete kick");
 		}catch(IOException e1){
 			e1.printStackTrace();	
 			Logs.addToGameLog("Une erreur vient de se produire lors de la déconnexion du compteID : " + _compte.get_GUID());

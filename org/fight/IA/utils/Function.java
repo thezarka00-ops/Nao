@@ -422,7 +422,7 @@ public class Function {
          if (F.getCurPM(fight) <= 0) {
              return false;
          }
-         if (Pathfinding.isNextTo(F.get_fightCell().getID(), T.get_fightCell().getID())) {
+         if (Pathfinding.isNextTo(fight.get_map(), F.get_fightCell().getID(), T.get_fightCell().getID())) {
              return false;
          }
 

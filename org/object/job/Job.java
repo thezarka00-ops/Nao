@@ -1075,7 +1075,6 @@ public class Job {
 				}
 			}
 			StatsMetier job = _P.getMetierBySkill(_skID);
-			job.addXp(_P, (int) (Config.XP_METIER + 9.0 / 10.0) * 10);
 			if (job == null || objectFm == null || runeOrPotion == null) {
 				SocketManager.GAME_SEND_Ec_PACKET(_P, "EI");
 				SocketManager.GAME_SEND_IO_PACKET_TO_MAP(_P.get_curCarte(), _P.get_GUID(), "-");
@@ -1184,6 +1183,7 @@ public class Job {
 				SocketManager.GAME_SEND_Ec_PACKET(_P, "EF");
 				SocketManager.GAME_SEND_Im_PACKET(_P, "0183");
 			} else {// Si réussite :)
+				job.addXp(_P, (int) (Config.XP_METIER + 9.0 / 10.0) * 10);
 				Logs.addToFmLog("Personnage "+_P.get_name()+":  +"+objectFm.getTemplate().getName()+" has fm witch succes !");
 				int coef = 0;
 				if (lvlElementRune == 1)

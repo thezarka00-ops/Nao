@@ -558,11 +558,16 @@ public class AuctionHouse {
 				return false;
 			
 			Ligne ligne = getLigne(ligneID);
-			
+
 			HdvEntry toBuy = ligne.doYouHave(amount, price);
-			
+
+			if(toBuy == null)
+			{
+				return false;
+			}
+
 			newOwner.addKamas(price * -1);//Retire l'argent à l'acheteur (prix et taxe de vente)
-			
+
 			if(toBuy.getOwner() != -1)
 			{
 				Accounts C = World.getCompte(toBuy.getOwner());
